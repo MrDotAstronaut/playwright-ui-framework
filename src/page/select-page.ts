@@ -1,28 +1,42 @@
-import { Page, Locator } from '@playwright/test';
-import please from '../utility/please';
+import { Page } from '@playwright/test';
+import { Perform } from '../utility/perform';
+import { Verify } from '../utility/verify';
+import { Get } from '../utility/get';
+import { Wait } from '../utility/wait';
 
 export class SelectPage {
-    
-    private page: Page;
-    private _header: Locator;
-    private _dropdown: Locator;
-    private _confirmation: Locator;
+
+    private selector = {
+        header : "//h1",
+        dropdown : "#fruits",
+        confirmation : ".subtitle",
+        multiselect : "#superheros"
+    };
+
+    private perform: Perform;
+    private verify: Verify;
+    private get: Get;
+    private wait: Wait;
 
     constructor(page: Page) {
-        this.page = page;
-        this._header = this.page.locator("//h1");
-        this._dropdown = this.page.locator("#fruits");
-        this._confirmation = this.page.locator(".subtitle");
+        this.perform = new Perform(page);
+        this.verify = new Verify(page);
+        this.get = new Get(page);
+        this.wait = new Wait(page);
     }
 
 	async testDropdown(title: string) {
-        await please.toContain(this._header, "Header", title);
-        await please.select(this._dropdown, "Select Dropdown", { value: "1" });
-        await please.toContain(this._confirmation, "Selection Confirmation", "Mango");
-        await please.select(this._dropdown, "Select Dropdown", { label: "Orange" });
-        await please.toContain(this._confirmation, "Selection Confirmation", "Orange");
-        await please.select(this._dropdown, "Select Dropdown", { index: 4 });
-        await please.toContain(this._confirmation, "Selection Confirmation", "Pine Apple");
+        await this.verify.toContain(this.selector.header, "Header", title);
+        await this.perform.select(this.selector.dropdown, "Mango", { value: "1" });
+        await this.verify.toContain(this.selector.confirmation, "Selection Confirmation", "Mango");
+        await this.perform.select(this.selector.dropdown, "Orange", { label: "Orange" });
+        await this.verify.toContain(this.selector.confirmation, "Selection Confirmation", "Orange");
+        await this.perform.select(this.selector.dropdown, "Pine Apple", { index: 5 });
+        await this.verify.toContain(this.selector.confirmation, "Selection Confirmation", "Pine Apple");
+    }
+
+    async testMultiSelect() {
+        //await this.selector.multiselect.selectOption({ value: "am" });
     }
 
 }

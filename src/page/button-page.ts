@@ -1,41 +1,46 @@
-import { Page, Locator } from '@playwright/test';
-import please from '../utility/please';
+import { Page } from '@playwright/test';
+import { Perform } from '../utility/perform';
+import { Verify } from '../utility/verify';
+import { Get } from '../utility/get';
+import { Wait } from '../utility/wait';
 
 export class ButtonPage {
+
+    private selector = {
+        header: "//h1",
+        click: "#home",
+        xy: "#position",
+        color: "#color",
+        size: "#property",
+        disabled: "(//button[@id='isDisabled'])[1]",
+        clickHold: "(//button[@id='isDisabled'])[2]"
+    }
     
-    private page: Page;
-    private _header: Locator;
-    private _click: Locator;
-    private _xy: Locator;
-    private _color: Locator;
-    private _size: Locator;
-    private _disabled: Locator;
-    private _clickHold: Locator;
+    private perform: Perform;
+    private verify: Verify;
+    private get: Get;
+    private wait: Wait;
 
     constructor(page: Page) {
-        this.page = page;
-        this._header = this.page.locator("//h1");
-        this._click = this.page.locator("#home");
-        this._xy = this.page.locator("#position");
-        this._color = this.page.locator("#color");
-        this._size = this.page.locator("#property");
-        this._disabled = this.page.locator("(//button[@id='isDisabled'])[1]");
-        this._clickHold = this.page.locator("(//button[@id='isDisabled'])[2]");
+        this.perform = new Perform(page);
+        this.verify = new Verify(page);
+        this.get = new Get(page);
+        this.wait = new Wait(page);
     }
 
 	async testFirstButton(title: string) {
-        await please.toContain(this._header, "Header", title);
-        await please.click(this._click, "Button 1");
+        await this.verify.toContain(this.selector.header, "Header", title);
+        await this.perform.click(this.selector.click, "Button 1");
     }
 
     async testRemainingButtons(title: string, color: string, hold: string) {
-        await please.toContain(this._header, "Header", title);
-        await please.getPosition(this._xy, "Button 2");
-        await please.getColor(this._color, "Button 3");
-        await please.getSize(this._size, "Button 4");
-        await please.toBeDisabled(this._disabled, "Button 5");
-        await please.click(this._clickHold, "Button 6", { delay: 1000 });
-        await please.toContain(this._clickHold, "Button 6", hold);
+        await this.verify.toContain(this.selector.header, "Header", title);
+        await this.get.position(this.selector.xy, "Button 2");
+        await this.get.color(this.selector.color, "Button 3");
+        await this.get.size(this.selector.size, "Button 4");
+        await this.verify.toBeDisabled(this.selector.disabled, "Button 5");
+        await this.perform.click(this.selector.clickHold, "Button 6", { delay: 1000 });
+        await this.verify.toContain(this.selector.clickHold, "Button 6", hold);
     }
 
 }

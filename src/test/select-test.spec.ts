@@ -9,5 +9,6 @@ test('has title', async ({
   await landingPage.launchURL(data.url);
   await landingPage.openWorkSpace();
   await workSpacePage.chooseWorkSpace(data.selectTest.choice);
-  await selectPage.testDropdown(data.selectTest.choice);
+  await selectPage.testDropdown(data.selectTest.title);
+  await selectPage.testMultiSelect();
 });

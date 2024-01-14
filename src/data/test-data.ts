@@ -1,73 +1,73 @@
 export const data = {
     url: "https://letcode.in/",
 	inputTest: {
-		choice: "Input",
+		choice: "edit",
 		fullName: "Perry the Platypus",
 		appendText: "I regret my life but ",
 		key: "Tab"
 	},
 	buttonTest: {
-		choice: "Button",
+		choice: "buttons",
 		color: "rgb(138, 77, 118)",
 		hold: "Button has been long pressed"
 	},
 	selectTest: {
-		choice: "Select",
+		choice: "dropdowns",
 		title: "Dropdown",
 		
 	},
 	alertTest: {
-		choice: "Alert"
+		choice: "alert"
 	},
 	frameTest: {
-		choice: "Frame"
+		choice: "frame"
 	},
 	radioTest: {
-		choice: "Radio"
+		choice: "radio"
 	},
 	windowTest: {
-		choice: "Window"
+		choice: "windows"
 	},
 	elementsTest: {
-		choice: "Elements"
+		choice: "elements"
 	},
 	dragTest: {
-		choice: "Drag"
+		choice: "draggable"
 	},
 	dropTest: {
-		choice: "Drop"
+		choice: "dropable"
 	},
 	sortTest: {
-		choice: "Sort"
+		choice: "sortable"
 	},
 	multiSelectTest: {
-		choice: "Multi-Select"
+		choice: "selectable"
 	},
 	sliderTest: {
-		choice: "Slider"
+		choice: "slider"
 	},
 	simpleTableTest: {
-		choice: "Simple table"
+		choice: "table"
 	},
 	advanceTableTest: {
-		choice: "Advance table"
+		choice: "advancedtable"
 	},
 	calendarTest: {
-		choice: "Calendar"
+		choice: "calendar"
 	},
 	waitsTest: {
-		choice: "Waits"
+		choice: "waits"
 	},
 	formsTest: {
-		choice: "Forms"
+		choice: "forms"
 	},
 	fileTest: {
-		choice: "File"
+		choice: "file"
 	},
 	shadowTest: {
-		choice: "Shadow"
+		choice: "shadow"
 	},
 	snakeGameTest: {
-		choice: "Snake Game"
+		choice: "game"
 	},
 }

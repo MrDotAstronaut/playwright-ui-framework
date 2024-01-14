@@ -1,30 +1,35 @@
-import { Page, Locator } from '@playwright/test';
-import please from '../utility/please';
+import { Page } from '@playwright/test';
+import { Perform } from '../utility/perform';
+import { Verify } from '../utility/verify';
+import { Get } from '../utility/get';
+import { Wait } from '../utility/wait';
 
 export class LandingPage {
 
-    private page: Page;
+    private selector = {
+        workSpace: "#testing",
+        login: "//a[text()='Log in']",
+        signUp: "//a[text()='Sign up']"
+    }
 
-    private _workSpace: Locator;
-    private _login: Locator;
-    private _signUp: Locator;
+    private perform: Perform;
+    private verify: Verify;
+    private get: Get;
+    private wait: Wait;
 
     constructor(page: Page) {
-
-        this.page = page;
-
-        this._workSpace = this.page.locator("#testing");
-        this._login = this.page.locator("//a[text()='Log in']");
-        this._signUp = this.page.locator("//a[text()='Sign up']");
-
+        this.perform = new Perform(page);
+        this.verify = new Verify(page);
+        this.get = new Get(page);
+        this.wait = new Wait(page);
     }
 
     async launchURL(url) {
-        await this.page.goto(url);
+        await this.perform.goto(url);
     }
 
     async openWorkSpace() {
-        await please.click(this._workSpace, "Work Space");
+        await this.perform.click(this.selector.workSpace, "Work Space");
     }
 
 }
