@@ -7,6 +7,7 @@ import { Wait } from '../utility/wait';
 export class WorkSpacePage {
 
     private selector = {
+        title: (title: string) => `//header/p[contains(text(),'${title}')]`,
         choose: (choice: string) => `a[href='/${choice}']`
     }
 
@@ -22,7 +23,8 @@ export class WorkSpacePage {
         this.wait = new Wait(page);
     }
 
-	async chooseWorkSpace(choice: string) {
+	async chooseWorkSpace(title: string, choice: string) {
+        await this.verify.toContain(this.selector.title(title), "Title", title);
         await this.perform.click(this.selector.choose(choice), choice);
     }
 
