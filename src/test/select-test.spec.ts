@@ -1,6 +1,6 @@
 import { test } from '../utility/manager';
 
-test('has title', async ({
+test('Select Test', async ({
   data,
   landingPage,
   workSpacePage,

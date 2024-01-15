@@ -22,7 +22,7 @@ export default defineConfig({
   reporter: 'html',
   use: {
     actionTimeout: 0,
-    headless: false,
+    headless: true,
     screenshot: 'off',
     video: 'off',
     trace: 'off',
