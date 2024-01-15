@@ -1,73 +1,114 @@
 export const data = {
     url: "https://letcode.in/",
 	inputTest: {
-		choice: "Input",
+		sectionTitle: "Input",
+		choice: "edit",
+		pageTitle: "Input",
 		fullName: "Perry the Platypus",
 		appendText: "I regret my life but ",
 		key: "Tab"
 	},
 	buttonTest: {
-		choice: "Button",
+		sectionTitle: "Button",
+		choice: "buttons",
+		pageTitle: "Button",
 		color: "rgb(138, 77, 118)",
 		hold: "Button has been long pressed"
 	},
 	selectTest: {
-		choice: "Select",
-		title: "Dropdown",
+		sectionTitle: "Select",
+		choice: "dropdowns",
+		pageTitle: "Dropdown"
 		
 	},
 	alertTest: {
-		choice: "Alert"
+		sectionTitle: "Alert",
+		choice: "alert",
+		pageTitle: "Alert"
 	},
 	frameTest: {
-		choice: "Frame"
+		sectionTitle: "Frame",
+		choice: "frame",
+		pageTitle: "Frame"
 	},
 	radioTest: {
-		choice: "Radio"
+		sectionTitle: "Radio",
+		choice: "radio",
+		pageTitle: "Radio & Checkbox"
 	},
 	windowTest: {
-		choice: "Window"
+		sectionTitle: "Window",
+		choice: "windows",
+		pageTitle: "Windows"
 	},
 	elementsTest: {
-		choice: "Elements"
+		sectionTitle: "Elements",
+		choice: "elements",
+		pageTitle: "Elements"
 	},
 	dragTest: {
-		choice: "Drag"
+		sectionTitle: "Drag",
+		choice: "draggable",
+		pageTitle: "Drag"
 	},
 	dropTest: {
-		choice: "Drop"
+		sectionTitle: "Drop",
+		choice: "dropable",
+		pageTitle: "Drop"
 	},
 	sortTest: {
-		choice: "Sort"
+		sectionTitle: "Sort",
+		choice: "sortable",
+		pageTitle: "Sort"
 	},
 	multiSelectTest: {
-		choice: "Multi-Select"
+		sectionTitle: "Multi-Select",
+		choice: "selectable",
+		pageTitle: "Selectable"
 	},
 	sliderTest: {
-		choice: "Slider"
+		sectionTitle: "Slider",
+		choice: "slider",
+		pageTitle: "Slider"
 	},
 	simpleTableTest: {
-		choice: "Simple table"
+		sectionTitle: "Table",
+		choice: "table",
+		pageTitle: "Table"
 	},
 	advanceTableTest: {
-		choice: "Advance table"
+		sectionTitle: "Table",
+		choice: "advancedtable",
+		pageTitle: "Table"
 	},
 	calendarTest: {
-		choice: "Calendar"
+		sectionTitle: "Calendar",
+		choice: "calendar",
+		pageTitle: "Calendar"
 	},
 	waitsTest: {
-		choice: "Waits"
+		sectionTitle: "Waits",
+		choice: "waits",
+		pageTitle: "Wait"
 	},
 	formsTest: {
-		choice: "Forms"
+		sectionTitle: "Forms",
+		choice: "forms",
+		pageTitle: "Form"
 	},
 	fileTest: {
-		choice: "File"
+		sectionTitle: "File",
+		choice: "file",
+		pageTitle: "Upload and Download"
 	},
 	shadowTest: {
-		choice: "Shadow"
+		sectionTitle: "Shadow",
+		choice: "shadow",
+		pageTitle: "Shadow DOM"
 	},
 	snakeGameTest: {
-		choice: "Snake Game"
+		sectionTitle: "Snake Game",
+		choice: "game",
+		pageTitle: "Snake Game"
 	},
 }

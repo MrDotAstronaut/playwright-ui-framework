@@ -1,26 +1,31 @@
 import { Page, Locator } from '@playwright/test';
-import please from '../utility/please';
+import { Perform } from '../utility/perform';
+import { Verify } from '../utility/verify';
+import { Get } from '../utility/get';
+import { Wait } from '../utility/wait';
 
 export class WorkSpacePage {
-    
-    private page: Page;
 
-    private _choose: Locator;
-
-    constructor(page: Page) {
-
-        this.page = page;
-
+    private selector = {
+        title: (title: string) => `//header/p[contains(text(),'${title}')]`,
+        choose: (choice: string) => `a[href='/${choice}']`
     }
 
-	async chooseWorkSpace(choice: string) {
-        if (choice.includes('table')) {
-            this._choose = this.page.locator(`//p[contains(text(),'Table')]//ancestor::div[@class='card']//a[text()='${choice}']`);
-        }
-        else {
-            this._choose = this.page.locator(`//p[contains(text(),'${choice}')]//ancestor::div[@class='card']//a`);
-        }
-        await please.click(this._choose, choice);
+    private perform: Perform;
+    private verify: Verify;
+    private get: Get;
+    private wait: Wait;
+
+    constructor(page: Page) {
+        this.perform = new Perform(page);
+        this.verify = new Verify(page);
+        this.get = new Get(page);
+        this.wait = new Wait(page);
+    }
+
+	async chooseWorkSpace(title: string, choice: string) {
+        await this.verify.toContain(this.selector.title(title), "Title", title);
+        await this.perform.click(this.selector.choose(choice), choice);
     }
 
 }

@@ -1,37 +1,42 @@
-import { Page, Locator } from '@playwright/test';
-import please from '../utility/please';
+import { Page } from '@playwright/test';
+import { Perform } from '../utility/perform';
+import { Verify } from '../utility/verify';
+import { Get } from '../utility/get';
+import { Wait } from '../utility/wait';
 
 export class InputPage {
     
-    private page: Page;
-    private _header: Locator;
-    private _enter: Locator;
-    private _append: Locator;
-    private _value: Locator;
-    private _clear: Locator;
-    private _disabled: Locator;
-    private _readOnly: Locator;
+    private selector = {
+        header: "//h1",
+        enter: "#fullName",
+        append: "#join",
+        value: "#getMe",
+        clear: "#clearMe",
+        disabled: "#noEdit",
+        readOnly: "#dontwrite"
+    }
+
+    private perform: Perform;
+    private verify: Verify;
+    private get: Get;
+    private wait: Wait;
 
     constructor(page: Page) {
-        this.page = page;
-        this._header = this.page.locator("//h1");
-        this._enter = this.page.locator("#fullName");
-        this._append = this.page.locator("#join");
-        this._value = this.page.locator("#getMe");
-        this._clear = this.page.locator("#clearMe");
-        this._disabled = this.page.locator("#noEdit");
-        this._readOnly = this.page.locator("#dontwrite");
+        this.perform = new Perform(page);
+        this.verify = new Verify(page);
+        this.get = new Get(page);
+        this.wait = new Wait(page);
     }
 
 	async testInputs(title: string, fullName: string, appendText: string, key: string) {
-        await please.toContain(this._header, "Header", title);
-        await please.fill(this._enter, "Input 1", fullName);
-        await please.type(this._append, "Input 2", appendText);
-        await please.press(this._append, "Input 2", key);
-        await please.getInput(this._value, "Input 3");
-        await please.clear(this._clear, "Input 4");
-        await please.toBeDisabled(this._disabled, "Input 5");
-        await please.toBeReadOnly(this._readOnly, "Input 6");
+        await this.verify.toContain(this.selector.header, "Header", title);
+        await this.perform.fill(this.selector.enter, "Input 1", fullName);
+        await this.perform.type(this.selector.append, "Input 2", appendText);
+        await this.perform.press(this.selector.append, "Input 2", key);
+        await this.get.input(this.selector.value, "Input 3");
+        await this.perform.clear(this.selector.clear, "Input 4");
+        await this.verify.toBeDisabled(this.selector.disabled, "Input 5");
+        await this.verify.toBeReadOnly(this.selector.readOnly, "Input 6");
     }
 
 }

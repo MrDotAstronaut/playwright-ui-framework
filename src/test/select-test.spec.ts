@@ -1,6 +1,6 @@
 import { test } from '../utility/manager';
 
-test('has title', async ({
+test('Select Test', async ({
   data,
   landingPage,
   workSpacePage,
@@ -8,6 +8,7 @@ test('has title', async ({
 }) => {
   await landingPage.launchURL(data.url);
   await landingPage.openWorkSpace();
-  await workSpacePage.chooseWorkSpace(data.selectTest.choice);
-  await selectPage.testDropdown(data.selectTest.choice);
+  await workSpacePage.chooseWorkSpace(data.buttonTest.sectionTitle, data.selectTest.choice);
+  await selectPage.testDropdown(data.selectTest.pageTitle);
+  await selectPage.testMultiSelect();
 });
