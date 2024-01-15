@@ -8,9 +8,14 @@ test('Input Test', async ({
 }) => {
   await landingPage.launchURL(data.url);
   await landingPage.openWorkSpace();
-  await workSpacePage.chooseWorkSpace(data.buttonTest.sectionTitle, data.inputTest.choice);
-  await inputPage.testInputs(
-    data.inputTest.pageTitle,
+  await workSpacePage.chooseWorkSpace({
+      title: data.inputTest.sectionTitle
+    },
+    data.inputTest.choice
+  );
+  await inputPage.testInputs({
+      title: data.inputTest.pageTitle,
+    },
     data.inputTest.fullName,
     data.inputTest.appendText,
     data.inputTest.key

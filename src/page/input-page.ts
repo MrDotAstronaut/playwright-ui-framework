@@ -28,8 +28,11 @@ export class InputPage {
         this.wait = new Wait(page);
     }
 
-	async testInputs(title: string, fullName: string, appendText: string, key: string) {
-        await this.verify.toContain(this.selector.header, "Header", title);
+	async testInputs(expected: { title: string }, fullName: string, appendText: string, key: string) {
+        let actual: { [key: string]: any } = {
+            title: await this.get.text(this.selector.header, "Header"),
+        };
+        await this.verify.toContain(actual.title, "Header", expected.title);
         await this.perform.fill(this.selector.enter, "Input 1", fullName);
         await this.perform.type(this.selector.append, "Input 2", appendText);
         await this.perform.press(this.selector.append, "Input 2", key);

@@ -28,19 +28,29 @@ export class ButtonPage {
         this.wait = new Wait(page);
     }
 
-	async testFirstButton(title: string) {
-        await this.verify.toContain(this.selector.header, "Header", title);
+	async testFirstButton(expected: { title: string }) {
+        const actual = {
+            title: await this.get.text(this.selector.header, "Header")
+        }
+        await this.verify.toContain(actual.title, "Header", expected.title);
         await this.perform.click(this.selector.click, "Button 1");
     }
 
-    async testRemainingButtons(title: string, color: string, hold: string) {
-        await this.verify.toContain(this.selector.header, "Header", title);
-        await this.get.position(this.selector.xy, "Button 2");
-        await this.get.color(this.selector.color, "Button 3");
-        await this.get.size(this.selector.size, "Button 4");
+    async testRemainingButtons(expected: { title: string, position: string, color: string, size: string, hold: string }) {
+        let actual: { [key: string]: any } = {
+            title: await this.get.text(this.selector.header, "Header"),
+            position: await this.get.position(this.selector.xy, "Button 2"),
+            color: await this.get.color(this.selector.color, "Button 3"),
+            size: await this.get.size(this.selector.size, "Button 4")
+        };
+        await this.verify.toContain(actual.title, "Header", expected.title);
+        await this.verify.toEqual(actual.position, "Button 2", expected.position);
+        await this.verify.toEqual(actual.color, "Button 3", expected.color);
+        await this.verify.toEqual(actual.size, "Button 4", expected.size);
         await this.verify.toBeDisabled(this.selector.disabled, "Button 5");
         await this.perform.click(this.selector.clickHold, "Button 6", { delay: 1000 });
-        await this.verify.toContain(this.selector.clickHold, "Button 6", hold);
+        actual.hold = await this.get.text(this.selector.clickHold, "Button 6");
+        await this.verify.toContain(actual.hold, "Button 6", expected.hold);
     }
 
 }

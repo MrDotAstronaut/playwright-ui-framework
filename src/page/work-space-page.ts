@@ -23,9 +23,12 @@ export class WorkSpacePage {
         this.wait = new Wait(page);
     }
 
-	async chooseWorkSpace(title: string, choice: string) {
-        await this.verify.toContain(this.selector.title(title), "Title", title);
-        await this.perform.click(this.selector.choose(choice), choice);
+	async chooseWorkSpace(expected: { title: string }, choice: string) {
+        const actual = {
+            title: await this.get.text(this.selector.title(expected.title), "Title")
+        }
+        await this.verify.toContain(actual.title, "Title", expected.title);
+        await this.perform.click(this.selector.choose(choice), expected.title);
     }
 
 }

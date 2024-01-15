@@ -4,6 +4,9 @@ export class Perform {
 
     private page: Page;
 
+    private BLUE = "\u001b[1;34m";
+    private RESET = "\u001b[0m";
+
     constructor(page: Page){
         this.page = page;
     }
@@ -26,12 +29,12 @@ export class Perform {
 
     async fill(selector: string, elementName: string, text: string) {
         await this.page.locator(selector).fill(text);
-        console.log(`Filled ${text} into ${elementName}`);
+        console.log(`Filled ${this.BLUE}${text}${this.RESET} into ${elementName}`);
     }
 
     async type(selector: string, elementName: string, text: string) {
         await this.page.locator(selector).type(text);
-        console.log(`Typed ${text} into ${elementName}`);
+        console.log(`Typed ${this.BLUE}${text}${this.RESET} into ${elementName}`);
     }
 
     async press(selector: string, elementName: string, key: string) {
@@ -44,17 +47,30 @@ export class Perform {
         console.log(`Cleared ${elementName}`);
     }
 
-    async select(selector: string, elementName: string, optional?: { value?: string, label?: string, index?: number }) {
-        if(optional?.value){
+    async selectSingle(selector: string, elementName: string, optional: { value?: string, label?: string, index?: number }) {
+        if(optional.value){
             await this.page.locator(selector).selectOption({ value: optional.value });
+            console.log(`Selected ${elementName} -> Value : ${optional.value}`);
         }
-        else if(optional?.label){
+        else if(optional.label){
             await this.page.locator(selector).selectOption({ label: optional.label });
+            console.log(`Selected ${elementName} -> Label : ${optional.label}`);
         }
-        else if(optional?.index){
+        else if(optional.index){
             await this.page.locator(selector).selectOption({ index: optional.index });
+            console.log(`Selected ${elementName} -> Index : ${optional.index}`);
         }
-        console.log(`Selected ${elementName}`);
+    }
+
+    async selectMultiple(selector: string, elementName: string, optional: { values?: string[], labels?: string[] }) {
+        if(optional.values){
+            await this.page.locator(selector).selectOption(optional.values);
+            console.log(`Selected ${elementName} -> Values : ${JSON.stringify(optional.values)}`);
+        }
+        else if(optional.labels){
+            await this.page.locator(selector).selectOption(optional.labels);
+            console.log(`Selected ${elementName} -> Labels : ${JSON.stringify(optional.labels)}`);
+        }
     }
 
 }

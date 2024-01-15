@@ -12,14 +12,36 @@ export const data = {
 		sectionTitle: "Button",
 		choice: "buttons",
 		pageTitle: "Button",
+		position: {
+			height: 40,
+			width: 130.046875
+		},
 		color: "rgb(138, 77, 118)",
+		size: {
+			x: 88,
+			y: 506,
+		},
 		hold: "Button has been long pressed"
 	},
 	selectTest: {
 		sectionTitle: "Select",
 		choice: "dropdowns",
-		pageTitle: "Dropdown"
-		
+		pageTitle: "Dropdown",
+		selection1: "Mango",
+		selection2: "Orange",
+		selection3: "Pine Apple",
+		selections: [
+			"Ant-Man",
+			"Aquaman"
+		],
+		options: [
+			"JavaScript",
+			"Java",
+			"Python",
+			"Swift",
+			"C#"
+		],
+		input: "India"
 	},
 	alertTest: {
 		sectionTitle: "Alert",
