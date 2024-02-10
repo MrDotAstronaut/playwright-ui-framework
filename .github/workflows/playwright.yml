@@ -55,7 +55,7 @@ jobs:
           path: playwright-report
           retention-days: 14
       - name: delete blob reports
-        uses: geekyeggo/delete-artifact
+        uses: geekyeggo/delete-artifact@v4
         with:
           name:
             blob-report-1
