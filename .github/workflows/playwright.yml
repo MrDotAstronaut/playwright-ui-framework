@@ -51,7 +51,13 @@ jobs:
       - name: upload html report
         uses: actions/upload-artifact@v4
         with:
-          name: html-report--attempt-${{ github.run_attempt }}
+          name: space-suite-report
           path: playwright-report
-          overwrite: true
           retention-days: 14
+      - name: delete blob reports
+        uses: geekyeggo/delete-artifact
+        with:
+          name:
+            blob-report-1
+            blob-report-2
+            blob-report-3
