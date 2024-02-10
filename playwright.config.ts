@@ -10,7 +10,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: process.env.CI ? 'blob' : 'html',
+  reporter: process.env.CI ? [['list'], ['blob', { open: 'never', outputDir: './blob-reports' }]] : [['list'], ['html', { open: 'never', outputDir: './html-reports' }]],
 
   use: {
     actionTimeout: 0,
