@@ -6,7 +6,7 @@ import { Wait } from '../utility/wait';
 
 export class ButtonPage {
 
-    private selector = {
+    public selector = {
         header: "//h1",
         click: "#home",
         xy: "#position",
