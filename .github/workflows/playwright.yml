@@ -58,6 +58,4 @@ jobs:
         uses: geekyeggo/delete-artifact@v4
         with:
           name:
-            blob-report-1
-            blob-report-2
-            blob-report-3
+            blob-report-*
