@@ -16,13 +16,13 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 16
-    - name: Install Dependencies
+    - name: install dependencies
       run: npm ci
-    - name: Install Browsers
-      run: npx playwright install --with-deps
-    - name: Run Space Suite
+    - name: install chrome 
+      run: npx playwright install chromium
+    - name: run space suite
       run: npx playwright test --quiet --shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
-    - name: Upload blob reports to GitHub Actions Artifacts
+    - name: upload blob reports to artifacts
       if: always()
       uses: actions/upload-artifact@v4
       with:
@@ -38,17 +38,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 16
-      - name: Install Dependencies
+      - name: install dependencies
         run: npm ci
-      - name: Download blob reports from GitHub Actions Artifacts
+      - name: download blob reports from artifacts
         uses: actions/download-artifact@v4
         with:
           path: merged-reports
           pattern: blob-report-*
           merge-multiple: true
-      - name: Merge into HTML Report
+      - name: merge into html report
         run: npx playwright merge-reports --reporter html ./merged-reports
-      - name: Upload HTML report
+      - name: upload html report
         uses: actions/upload-artifact@v4
         with:
           name: html-report--attempt-${{ github.run_attempt }}
