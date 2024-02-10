@@ -48,4 +48,9 @@ export class Get {
         return texts;
     }
 
+    async count(selector: string) {
+        const texts = this.page.locator(selector).count();
+        return texts;
+    }
+
 }

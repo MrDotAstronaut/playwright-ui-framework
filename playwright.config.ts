@@ -1,14 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config();
-
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
 export default defineConfig({
   testDir: './src/test',
   timeout: 30 * 1000,
@@ -19,7 +10,9 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+  //reporter: [['./src/utility/custom-reporter.ts'], ['html', { open: 'never' }]],
+  reporter: process.env.CI ? [['list'], ['blob', { open: 'never', outputFolder: 'blob-reports' }]] : [['list'], ['html', { open: 'never', outputFolder: 'html-reports' }]],
+
   use: {
     actionTimeout: 0,
     headless: true,
@@ -31,7 +24,7 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
+      name: 'space-suite',
       use: {
         ...devices['Desktop Chrome']
       },
@@ -68,7 +61,7 @@ export default defineConfig({
     //   use: { channel: 'chrome' },
     // },
 
-  ],
+ ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
   // outputDir: 'test-results/',
