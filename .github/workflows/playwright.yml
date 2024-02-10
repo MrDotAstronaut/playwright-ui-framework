@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [ master ]
 jobs:
-  test:
+  Shard:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     strategy:
@@ -12,46 +12,45 @@ jobs:
         shardIndex: [1, 2, 3]
         shardTotal: [3]
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
-        node-version: 18
+        node-version: 16
     - name: Install Dependencies
       run: npm ci
-    - name: Install Browsers
-      run: npx playwright install --with-deps
+    - name: Install Chrome 
+      run: npx playwright install chromium
     - name: Run Space Suite
       run: npx playwright test --quiet --shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
-    - name: Upload blob reports to GitHub Actions Artifacts
+    - name: Upload Blob Reports to Artifacts
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: blob-report-${{ matrix.shardIndex }}
-        path: blob-reports/
+        path: blob-report
         retention-days: 1
-  merge-reports:
+  Merge-Reports:
     if: always()
-    needs: [test]
+    needs: [Shard]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 16
       - name: Install Dependencies
         run: npm ci
-      - name: Download blob reports from GitHub Actions Artifacts
+      - name: Download Blob Reports from Artifacts
         uses: actions/download-artifact@v4
         with:
-          path: merged-reports/
+          path: merged-reports
           pattern: blob-report-*
           merge-multiple: true
       - name: Merge into HTML Report
         run: npx playwright merge-reports --reporter html ./merged-reports
-
-      - name: Upload HTML report
+      - name: Upload Merged Report
         uses: actions/upload-artifact@v4
         with:
-          name: html-report--attempt-${{ github.run_attempt }}
-          path: html-reports/
+          name: space-suite-report
+          path: playwright-report
           retention-days: 14
