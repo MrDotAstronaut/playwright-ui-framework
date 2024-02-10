@@ -10,7 +10,6 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: 0,
   workers: process.env.CI ? 1 : undefined,
-  //reporter: [['./src/utility/custom-reporter.ts'], ['html', { open: 'never' }]],
   reporter: process.env.CI ? [['list'], ['blob', { open: 'never', outputFolder: 'blob-reports' }]] : [['list'], ['html', { open: 'never', outputFolder: 'html-reports' }]],
 
   use: {
