@@ -55,6 +55,3 @@ jobs:
           path: playwright-report
           overwrite: true
           retention-days: 14
-      - uses: geekyeggo/delete-artifact@v1
-        with:
-          name: setup
