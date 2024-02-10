@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [ master ]
 jobs:
-  Test-Shard:
+  Shard:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     strategy:
@@ -31,7 +31,7 @@ jobs:
         retention-days: 1
   Merge-Reports:
     if: always()
-    needs: [Test-Shard]
+    needs: [Shard]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
