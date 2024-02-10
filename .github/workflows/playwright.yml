@@ -53,4 +53,8 @@ jobs:
         with:
           name: html-report--attempt-${{ github.run_attempt }}
           path: playwright-report
+          overwrite: true
           retention-days: 14
+      - uses: geekyeggo/delete-artifact@v1
+        with:
+          name: setup
